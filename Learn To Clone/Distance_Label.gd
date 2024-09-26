@@ -1,8 +1,6 @@
-extends Node2D
+extends Label
 
-var plpos = [0,0]
-var glob_pos_jester = [0,0]
-var spd_jester = [0,0]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -10,4 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	text = str(Globs.glob_pos_jester[0]) + ' Distance\n' + str(Globs.glob_pos_jester[1]) + ' Height\n' + str(floor(Globs.spd_jester[0])) + ' Speed (X)\n' + str(floor(Globs.spd_jester[1])) + ' Speed (Y)'

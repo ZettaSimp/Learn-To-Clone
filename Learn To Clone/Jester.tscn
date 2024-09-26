@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfflrspbh2d1k"]
+
+[ext_resource type="Script" path="res://Distance_Label.gd" id="1_tii3j"]
+[ext_resource type="Texture2D" uid="uid://i2jh3uhky2c7" path="res://Sprites/Jester.png" id="2_cb676"]
+[ext_resource type="Script" path="res://Jester.gd" id="3_xe0lk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gf6jv"]
+radius = 28.0
+
+[node name="Jester" type="CharacterBody2D"]
+script = ExtResource("3_xe0lk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -574.0
+offset_top = -324.0
+offset_right = -305.0
+offset_bottom = -242.0
+text = "Test"
+script = ExtResource("1_tii3j")
+
+[node name="Jester_Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_cb676")
+
+[node name="Area2D" type="Area2D" parent="Jester_Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jester_Sprite/Area2D"]
+shape = SubResource("CircleShape2D_gf6jv")
