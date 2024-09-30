@@ -1,6 +1,12 @@
 extends Node2D
 
 @onready var Jest = $Jester_Sprite
+@onready var cb = $Cannon_Bar
+@onready var cbb = $Cannon_Bar/Cannon_Bar_Bar
+var pos_collected = false
+var cbb_starting_pos = 0
+var cbb_speed = 0
+var bar_delay = 2
 var accel = 2500
 var fuel = 4
 var speed = [0,0]
@@ -11,11 +17,11 @@ var floor_constant = 0.9
 var drag = 0.1
 var dragV = Vector2(0,0)
 var dragV2 = Vector2(0,0)
-var glider_constant = 2.0
+var glider_constant = 1.0
 var glide = 0
 var glide_ang = 0
 var bounces = 0
-var cannon_state = 0
+var cannon_state = -3
 var cannon_power = 1000
 
 # Called when the node enters the scene tree for the first time.
@@ -25,12 +31,43 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if cannon_state == 0:
+	if pos_collected == false:
+		cbb_starting_pos = cbb.position.x
+		pos_collected = true
+		return
+	if cannon_state == -3:
+		cb.frame = 1
 		if Input.is_action_just_pressed("ui_accept"):
+			cannon_state = -2
+			cbb.position.x = cbb_starting_pos
+		return
+	if cannon_state == -2:
+		if cb.position.y < -200:
+			cb.position.y += delta * 200
+		else:
+			cb.position.y = -200
+			cannon_state = -1
+		return
+	if cannon_state == -1:
+		cbb.position.x += cbb_speed
+		cbb_speed += delta * 6
+		cannon_power = Globs.cannon_level * (int(1000 * (cbb.position.x/110)) % 1000)
+		if Input.is_action_just_pressed("ui_accept") or (cbb.position.x > 10 and cannon_power/Globs.cannon_level < 50):
 			speed = [cannon_power,-cannon_power]
 			Jest.rotation_degrees = 45
-			cannon_state = 1
+			cannon_state = 0
+			bar_delay = 2
+			cb.frame = 0
 		return
+	if cannon_state == 0:
+		cbb_speed = 0
+		if bar_delay > 0:
+			bar_delay += -delta
+		else:
+			cannon_state = 1
+	if cannon_state == 1:
+		if cb.position.y > -400:
+			cb.position.y += -delta * 200
 	if Input.is_action_pressed('ui_left') == true:
 		Jest.rotation_degrees = Jest.rotation_degrees - delta * 90
 	if Input.is_action_pressed('ui_right') == true:
