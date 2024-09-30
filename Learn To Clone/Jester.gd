@@ -1,14 +1,16 @@
 extends Node2D
 
 @onready var Jest = $Jester_Sprite
-var accel = 1500
+var accel = 2500
 var speed = [0,0]
 var speed_mag = 0
 var speed_ang = 0
 var bounce_constant = 0.6
 var floor_constant = 0.9
-var drag = 0.0015
-var glider_constant = 2
+var drag = 0.1
+var dragV = Vector2(0,0)
+var dragV2 = Vector2(0,0)
+var glider_constant = 2.0
 var glide = 0
 var glide_ang = 0
 var bounces = 0
@@ -35,15 +37,13 @@ func _process(delta):
 	glide_ang = -(Jest.rotation - 3.14159265358 / 2)
 	glide = speed_mag*glider_constant*delta*sin(glide_ang-speed_ang)
 	Globs.text = str(floor(speed_ang * 180 / 3.14159265358)) + '\n' + str(floor(glide_ang * 180 / 3.14159265358)) + '\n' + str(glide) + '\n' + str(floor(speed[0])) + '\n' + str(floor(speed[1]))
-	speed[0] += glide * -cos(glide_ang)
-	speed[1] += glide * -sin(glide_ang)
-	if glider_constant > 0:
-		glide = 0
-	speed = [speed[0]-speed[0]*drag*delta,speed[1]-speed[1]*drag*delta]
-	global_position.x += speed[0] * delta
+	dragV = Vector2(drag+10*abs(sin(glide_ang)),drag+10*abs(cos(glide_ang)))
+	dragV2 = Vector2(-10*sin(glide_ang),-10*cos(glide_ang))
+	if glider_constant == 0:
+		dragV = Vector2(drag,drag)
+		dragV2 = Vector2(0,0)
 	if global_position.y + speed[1] * delta < 455:
 		speed[1] += 1000 * delta
-		global_position.y += speed[1] * delta
 	else:
 		if speed[1] > 10:
 			speed[0] = speed[0] * bounce_constant
@@ -54,6 +54,9 @@ func _process(delta):
 			speed[0] = speed[0] - speed[0] * floor_constant * delta
 			speed[1] = 0
 			global_position.y = 455
+	speed = [speed[0]-speed[0]*dragV.x*delta+speed[1]*dragV2.y*delta*sign(sin(glide_ang)),speed[1]-speed[1]*dragV.y*delta+speed[0]*dragV2.x*delta]
+	global_position.x += speed[0] * delta
+	global_position.y += speed[1] * delta
 	Globs.glob_pos_jester = [global_position.x,global_position.y]
 	Globs.spd_jester = [speed[0],speed[1]]
 	Globs.plpos = [floor(global_position.x/16),floor(global_position.y/16)]

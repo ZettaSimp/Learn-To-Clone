@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	for c1 in range(-50+Globs.plpos[0],50+Globs.plpos[0]):
+	for c1 in range(-75+Globs.plpos[0],75+Globs.plpos[0]):
 		for c2 in range(-50+Globs.plpos[1],50+Globs.plpos[1]):
 			if c2 < 30:
 				set_cell(0,Vector2i(c1,c2),2,Vector2i(0,0))
