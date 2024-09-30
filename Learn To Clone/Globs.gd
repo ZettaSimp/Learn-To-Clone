@@ -1,5 +1,6 @@
 extends Node2D
 
+var cloud_count = 0
 var plpos = [0,0]
 var glob_pos_jester = [0,0]
 var spd_jester = [0,0]

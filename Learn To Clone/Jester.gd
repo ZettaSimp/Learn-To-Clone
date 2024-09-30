@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var Jest = $Jester_Sprite
 var accel = 2500
+var fuel = 4
 var speed = [0,0]
 var speed_mag = 0
 var speed_ang = 0
@@ -14,6 +15,8 @@ var glider_constant = 2.0
 var glide = 0
 var glide_ang = 0
 var bounces = 0
+var cannon_state = 0
+var cannon_power = 1000
 
 # Called when the node enters the scene tree for the first time.
 
@@ -22,11 +25,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if cannon_state == 0:
+		if Input.is_action_just_pressed("ui_accept"):
+			speed = [cannon_power,-cannon_power]
+			Jest.rotation_degrees = 45
+			cannon_state = 1
+		return
 	if Input.is_action_pressed('ui_left') == true:
 		Jest.rotation_degrees = Jest.rotation_degrees - delta * 90
 	if Input.is_action_pressed('ui_right') == true:
 		Jest.rotation_degrees = Jest.rotation_degrees + delta * 90
-	if Input.is_action_pressed('ui_accept') == true:
+	if Input.is_action_pressed('ui_accept') == true and fuel > 0:
+		fuel += -delta
 		speed[0] += accel * sin(Jest.rotation) * delta
 		speed[1] += accel * -cos(Jest.rotation) * delta
 	speed_mag = sqrt(speed[0]*speed[0]+speed[1]*speed[1])
@@ -62,3 +72,4 @@ func _process(delta):
 	Globs.glob_pos_jester = [global_position.x,global_position.y]
 	Globs.spd_jester = [speed[0],speed[1]]
 	Globs.plpos = [floor(global_position.x/16),floor(global_position.y/16)]
+	Globs.text = str(fuel)

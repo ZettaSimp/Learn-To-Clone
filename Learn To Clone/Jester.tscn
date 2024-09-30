@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfflrspbh2d1k"]
+[gd_scene load_steps=7 format=3 uid="uid://cfflrspbh2d1k"]
 
 [ext_resource type="Script" path="res://Distance_Label.gd" id="1_tii3j"]
 [ext_resource type="Texture2D" uid="uid://i2jh3uhky2c7" path="res://Sprites/Jester.png" id="2_cb676"]
 [ext_resource type="Texture2D" uid="uid://belhl5nar56fd" path="res://Sprites/Sky.png" id="2_ojdi6"]
+[ext_resource type="Script" path="res://Skybox.gd" id="3_dysdr"]
 [ext_resource type="Script" path="res://Jester.gd" id="3_xe0lk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gf6jv"]
@@ -12,10 +13,11 @@ radius = 28.0
 script = ExtResource("3_xe0lk")
 
 [node name="Skybox" type="Sprite2D" parent="."]
-z_index = -10
-position = Vector2(-16.75, -53)
-scale = Vector2(42.4844, 28.125)
+z_index = -5
+position = Vector2(4.50005, -78.0001)
+scale = Vector2(73.5313, 55.75)
 texture = ExtResource("2_ojdi6")
+script = ExtResource("3_dysdr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

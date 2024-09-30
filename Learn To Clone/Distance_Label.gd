@@ -8,5 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	text = str(Globs.glob_pos_jester[0]) + ' Distance\n' + str(Globs.glob_pos_jester[1]) + ' Height\n' + str(floor(Globs.spd_jester[0])) + ' Speed (X)\n' + str(floor(Globs.spd_jester[1])) + ' Speed (Y)'
-	text = Globs.text
+	text = str(floor(Globs.glob_pos_jester[0])) + ' Distance\n' + str(floor(Globs.glob_pos_jester[1])-455) + ' Height\n' + str(floor(Globs.spd_jester[0])) + ' Speed (X)\n' + str(floor(Globs.spd_jester[1])) + ' Speed (Y)\n' + Globs.text
