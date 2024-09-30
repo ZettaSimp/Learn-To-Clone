@@ -14,7 +14,9 @@ var glider_constant = 2.0
 var glide = 0
 var glide_ang = 0
 var bounces = 0
+
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
 	pass # Replace with function body.
 
