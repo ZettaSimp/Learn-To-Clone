@@ -35,6 +35,8 @@ func _process(delta):
 		cbb_starting_pos = cbb.position.x
 		pos_collected = true
 		return
+	if cannon_state == -4:
+		return
 	if cannon_state == -3:
 		cb.frame = 1
 		if Input.is_action_just_pressed("ui_accept"):
@@ -103,6 +105,8 @@ func _process(delta):
 			speed[0] = speed[0] - speed[0] * floor_constant * delta
 			speed[1] = 0
 			global_position.y = 455
+			if abs(speed[0]) < 5:
+				cannon_state = -4
 	speed = [speed[0]-speed[0]*dragV.x*delta+speed[1]*dragV2.y*delta*sign(sin(glide_ang)),speed[1]-speed[1]*dragV.y*delta+speed[0]*dragV2.x*delta]
 	global_position.x += speed[0] * delta
 	global_position.y += speed[1] * delta

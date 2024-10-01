@@ -1,6 +1,6 @@
 extends Sprite2D
 
-var cloud_max = 100
+var cloud_max = 120
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	while Globs.cloud_count < cloud_max:
