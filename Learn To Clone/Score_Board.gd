@@ -42,7 +42,7 @@ func _process(delta):
 	if Globs.game_state == 3:
 		multy = 1+float(floor((Globs.flight_time/dur_ratio)*100))/100
 		h_cash = floor(height_max/100)
-		d_cash = floor(Globs.glob_pos_jester[0]/100)
+		d_cash = abs(floor(Globs.glob_pos_jester[0]/100))
 		rt += delta*0.25
 		if rt >= 0.2 and rt < 0.4:
 			dc.text = str(floor(d_cash*((rt-0.2)/0.2)))
