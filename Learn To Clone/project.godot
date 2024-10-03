@@ -18,3 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globs="*res://Globs.gd"
+
+[display]
+
+window/stretch/mode="viewport"

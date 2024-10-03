@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://vclilyny2f2p"]
+
+[ext_resource type="Texture2D" uid="uid://cbowncdkwwfat" path="res://Sprites/Score Sheet.png" id="1_ff71i"]
+[ext_resource type="Script" path="res://Score_Board.gd" id="2_jihdw"]
+
+[node name="Score_Board" type="Sprite2D"]
+texture = ExtResource("1_ff71i")
+script = ExtResource("2_jihdw")
+
+[node name="Distance_Label" type="Label" parent="."]
+offset_left = -150.0
+offset_top = -47.0
+offset_right = 48.0
+offset_bottom = -24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Distance"
+
+[node name="Height_Label" type="Label" parent="."]
+offset_left = -150.0
+offset_top = -16.0
+offset_right = 48.0
+offset_bottom = 7.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Max Height"
+
+[node name="Duration_Label" type="Label" parent="."]
+offset_left = -150.0
+offset_top = 15.0
+offset_right = 48.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Duration"
+
+[node name="Total" type="Label" parent="."]
+offset_left = -150.0
+offset_top = 47.0
+offset_right = 48.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "TOTAL:"
+
+[node name="Di_Cash" type="Label" parent="."]
+offset_left = 60.0
+offset_top = -47.0
+offset_right = 100.0
+offset_bottom = -24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "10
+"
+
+[node name="MH_Cash" type="Label" parent="."]
+offset_left = 60.0
+offset_top = -16.0
+offset_right = 100.0
+offset_bottom = 7.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Cash
+"
+
+[node name="Du_Cash" type="Label" parent="."]
+offset_left = 60.0
+offset_top = 15.0
+offset_right = 100.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Cash
+"
+
+[node name="Total_Cash" type="Label" parent="."]
+offset_left = 60.0
+offset_top = 47.0
+offset_right = 100.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Cash
+"
+
+[node name="Day_Label" type="Label" parent="."]
+offset_left = -21.0
+offset_top = -78.0
+offset_right = 22.0
+offset_bottom = -55.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Day 1"
+horizontal_alignment = 1

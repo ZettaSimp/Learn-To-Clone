@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmii43dxl0no4"]
+[gd_scene load_steps=13 format=3 uid="uid://cmii43dxl0no4"]
 
 [ext_resource type="Texture2D" uid="uid://bs8xa4x0fnwro" path="res://Sprites/Grass.png" id="1_31we0"]
 [ext_resource type="Script" path="res://Globs.gd" id="1_sir4u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Place_Sky_And_Ground.gd" id="4_nsalf"]
 [ext_resource type="PackedScene" uid="uid://cfflrspbh2d1k" path="res://Jester.tscn" id="6_gf0sw"]
 [ext_resource type="Texture2D" uid="uid://ccdqxl0kaudh0" path="res://Sprites/Cannon.png" id="7_id3te"]
+[ext_resource type="PackedScene" uid="uid://vclilyny2f2p" path="res://score_board.tscn" id="8_lvd56"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d60d0"]
 texture = ExtResource("1_31we0")
@@ -49,3 +50,7 @@ position = Vector2(7, 382)
 position = Vector2(-21.125, 340)
 scale = Vector2(1.9082, 2.85156)
 texture = ExtResource("7_id3te")
+
+[node name="Score_Board" parent="." instance=ExtResource("8_lvd56")]
+z_index = 4
+position = Vector2(0, 900)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfflrspbh2d1k"]
+[gd_scene load_steps=11 format=3 uid="uid://cfflrspbh2d1k"]
 
 [ext_resource type="Script" path="res://Distance_Label.gd" id="1_tii3j"]
 [ext_resource type="Texture2D" uid="uid://i2jh3uhky2c7" path="res://Sprites/Jester.png" id="2_cb676"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://beuby2rhg2fqh" path="res://Sprites/Glider.png" id="6_hw7w4"]
 [ext_resource type="Texture2D" uid="uid://dcdf2jaagq3bu" path="res://Sprites/Cannon_Bar.png" id="7_n7idh"]
 [ext_resource type="Texture2D" uid="uid://b5ijke8crxr7d" path="res://Sprites/Cannon_Bar_Bar.png" id="8_h4ltp"]
+[ext_resource type="Script" path="res://Darkout.gd" id="9_knqxx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gf6jv"]
 radius = 28.0
@@ -56,3 +57,13 @@ frame = 1
 position = Vector2(-101.532, -0.309179)
 scale = Vector2(1.80169, 1.41787)
 texture = ExtResource("8_h4ltp")
+
+[node name="Darkout" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+offset_left = -1200.0
+offset_top = -1010.0
+offset_right = 1372.0
+offset_bottom = 926.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("9_knqxx")

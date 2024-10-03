@@ -53,9 +53,10 @@ func _process(delta):
 	if cannon_state == -1:
 		cbb.position.x += cbb_speed
 		cbb_speed += delta * 6
-		cannon_power = Globs.cannon_level * (int(1000 * (cbb.position.x/110)) % 1000)
-		if Input.is_action_just_pressed("ui_accept") or (cbb.position.x > 10 and cannon_power/Globs.cannon_level < 50):
-			speed = [cannon_power,-cannon_power]
+		cannon_power = Globs.cannon_level * (int(1000 * (float(cbb.position.x+100)/float(210))) % 1000)
+		Globs.text = str(cannon_power) + '\n' + str(cbb.position.x+100)
+		if Input.is_action_just_pressed("ui_accept") or (cbb.position.x > 10 and (cannon_power)/float(Globs.cannon_level) < 50):
+			speed = [cannon_power+100,-cannon_power-100]
 			Jest.rotation_degrees = 45
 			cannon_state = 0
 			bar_delay = 2
@@ -107,6 +108,7 @@ func _process(delta):
 			global_position.y = 455
 			if abs(speed[0]) < 5:
 				cannon_state = -4
+				Globs.game_state = 1
 	speed = [speed[0]-speed[0]*dragV.x*delta+speed[1]*dragV2.y*delta*sign(sin(glide_ang)),speed[1]-speed[1]*dragV.y*delta+speed[0]*dragV2.x*delta]
 	global_position.x += speed[0] * delta
 	global_position.y += speed[1] * delta
