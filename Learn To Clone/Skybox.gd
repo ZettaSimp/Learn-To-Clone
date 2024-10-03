@@ -1,6 +1,6 @@
 extends Sprite2D
 
-var cloud_max = 120
+var cloud_max = 140
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	while Globs.cloud_count < cloud_max:
@@ -10,7 +10,7 @@ func _ready():
 func _process(_delta):
 	while Globs.cloud_count < cloud_max:
 		var circ = randf_range(0,2) * PI
-		_make_cloud(12*cos(circ),12*sin(circ))
+		_make_cloud(13*cos(circ),13*sin(circ))
 		Globs.cloud_count += 1
 	pass
 

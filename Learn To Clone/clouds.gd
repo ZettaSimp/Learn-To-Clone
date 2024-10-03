@@ -13,6 +13,6 @@ func _process(delta):
 	position.y += (pre_pos[1] - c_pos[1])/200
 	pre_pos = c_pos
 	c_pos = Globs.glob_pos_jester
-	if abs(position.x) > 13 or abs(position.y) > 13:
+	if abs(position.x) > 14 or abs(position.y) > 14:
 		Globs.cloud_count += -1
 		queue_free()

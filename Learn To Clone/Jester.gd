@@ -61,6 +61,7 @@ func _process(delta):
 			cannon_state = 0
 			bar_delay = 2
 			cb.frame = 0
+			Globs.flight_time = 0
 		return
 	if cannon_state == 0:
 		cbb_speed = 0
