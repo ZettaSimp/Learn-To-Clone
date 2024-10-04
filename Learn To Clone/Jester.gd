@@ -3,6 +3,7 @@ extends Node2D
 @onready var Jest = $Jester_Sprite
 @onready var cb = $Cannon_Bar
 @onready var cbb = $Cannon_Bar/Cannon_Bar_Bar
+var starting_pos = global_position
 var pos_collected = false
 var cbb_starting_pos = 0
 var cbb_speed = 0
@@ -14,7 +15,7 @@ var speed_mag = 0
 var speed_ang = 0
 var bounce_constant = 0.6
 var floor_constant = 0.9
-var drag = 0.1
+var drag = 0.3
 var dragV = Vector2(0,0)
 var dragV2 = Vector2(0,0)
 var glider_constant = 1.0
@@ -31,6 +32,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Globs.game_state == 4:
+		game_reset()
+		Globs.game_state = 0
+		return
 	if pos_collected == false:
 		cbb_starting_pos = cbb.position.x
 		pos_collected = true
@@ -117,3 +122,10 @@ func _process(delta):
 	Globs.spd_jester = [speed[0],speed[1]]
 	Globs.plpos = [floor(global_position.x/16),floor(global_position.y/16)]
 	Globs.text = str(fuel)
+
+func game_reset():
+	global_position = Vector2(7,382)
+	Globs.glob_pos_jester = [global_position.x,global_position.y]
+	cannon_state = -3
+	fuel = Globs.fuel_max
+	Globs.cloud_reset = true

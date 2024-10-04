@@ -9,6 +9,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Globs.cloud_reset == true:
+		Globs.cloud_count += -1
+		queue_free()
 	position.x += delta * 0.1 + (pre_pos[0] - c_pos[0])/500
 	position.y += (pre_pos[1] - c_pos[1])/200
 	pre_pos = c_pos

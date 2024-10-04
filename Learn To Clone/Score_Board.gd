@@ -60,4 +60,8 @@ func _process(delta):
 			Globs.money += floor((h_cash+d_cash)*multy)
 			Globs.game_state = 4
 			rt = 0
+			height_max = 0
+			day += 1
+	if Globs.game_state < 1:
+		position.y = 600
 	pass
