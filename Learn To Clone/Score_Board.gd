@@ -62,6 +62,7 @@ func _process(delta):
 			rt = 0
 			height_max = 0
 			day += 1
+			return
 	if Globs.game_state < 1:
 		position.y = 600
 	pass

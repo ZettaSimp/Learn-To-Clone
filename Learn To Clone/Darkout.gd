@@ -8,11 +8,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Globs.game_state > 0:
+	if Globs.game_state > 0 and Globs.game_state != 6:
 		if get_self_modulate()[3] < 0.7:
 			set_self_modulate(Color(0,0,0,get_self_modulate()[3] + 0.7*delta))
 		else:
-			Globs.game_state = 2
+			if Globs.game_state == 1:
+				Globs.game_state = 2
 	else:
 		set_self_modulate(Color(0,0,0,0))
 	pass

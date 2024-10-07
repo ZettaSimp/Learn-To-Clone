@@ -3,6 +3,10 @@ extends Node2D
 @onready var Jest = $Jester_Sprite
 @onready var cb = $Cannon_Bar
 @onready var cbb = $Cannon_Bar/Cannon_Bar_Bar
+@onready var glider_v = $Jester_Sprite/Glider
+@onready var win = $Winner
+@onready var dmt = $Winner/Days_Money_And_Time
+@onready var rocket = $Jester_Sprite/Rocket_Sprite
 var starting_pos = global_position
 var pos_collected = false
 var cbb_starting_pos = 0
@@ -32,10 +36,30 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Globs.game_state == 4:
+	if Globs.game_state == 6:
+		win.visible = true
+		win.set_self_modulate(Color(1,1,1,win.get_self_modulate()[3] + delta*0.1))
+		dmt.text = 'Days: ' + str(Globs.days) + ' Time: ' + str(floor(Globs.time_played))
+		dmt.set_self_modulate(Color(1,1,1,dmt.get_self_modulate()[3] + delta*0.1))
+		return
+	if Globs.game_state == 5:
 		game_reset()
 		Globs.game_state = 0
 		return
+	if Globs.game_state == 3 or Globs.game_state == 4:
+		return
+	drag = Globs.drag_correction
+	accel = Globs.accel_correction
+	if Globs.item_l[1] > 0:
+		glider_constant = 1
+		glider_v.visible = true
+	else:
+		glider_constant = 0
+		glider_v.visible = false
+	if Globs.item_l[2] > 0:
+		rocket.visible = true
+	else:
+		rocket.visible = false
 	if pos_collected == false:
 		cbb_starting_pos = cbb.position.x
 		pos_collected = true
@@ -85,6 +109,9 @@ func _process(delta):
 		fuel += -delta
 		speed[0] += accel * sin(Jest.rotation) * delta
 		speed[1] += accel * -cos(Jest.rotation) * delta
+		rocket.frame = 1
+	else:
+		rocket.frame = 0
 	speed_mag = sqrt(speed[0]*speed[0]+speed[1]*speed[1])
 	if abs(speed[0]) > 0:
 		speed_ang = sign(speed[0]) * atan(-speed[1]/speed[0])
@@ -97,22 +124,22 @@ func _process(delta):
 	Globs.text = str(floor(speed_ang * 180 / 3.14159265358)) + '\n' + str(floor(glide_ang * 180 / 3.14159265358)) + '\n' + str(glide) + '\n' + str(floor(speed[0])) + '\n' + str(floor(speed[1]))
 	dragV = Vector2(drag+10*abs(sin(glide_ang)),drag+10*abs(cos(glide_ang)))
 	dragV2 = Vector2(-10*sin(glide_ang),-10*cos(glide_ang))
-	if glider_constant == 0:
+	if glider_constant == 0 or int(floor(Jest.rotation_degrees)) % 180 < 0:
 		dragV = Vector2(drag,drag)
 		dragV2 = Vector2(0,0)
 	if global_position.y + speed[1] * delta < 455:
 		speed[1] += 1000 * delta
 	else:
-		if speed[1] > 10:
+		if speed[1] > 20:
 			speed[0] = speed[0] * bounce_constant
 			speed[1] = -speed[1] * bounce_constant
 			global_position.y += speed[1] * delta
 			bounces += 1
 		else:
-			speed[0] = speed[0] - speed[0] * floor_constant * delta
+			speed[0] = abs(speed[0] - speed[0] * floor_constant * delta)
 			speed[1] = 0
 			global_position.y = 455
-			if abs(speed[0]) < 5:
+			if abs(speed[0]) < 10:
 				cannon_state = -4
 				Globs.game_state = 1
 	speed = [speed[0]-speed[0]*dragV.x*delta+speed[1]*dragV2.y*delta*sign(sin(glide_ang)),speed[1]-speed[1]*dragV.y*delta+speed[0]*dragV2.x*delta]
